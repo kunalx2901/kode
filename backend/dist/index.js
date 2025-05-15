@@ -26,9 +26,11 @@ const prompts_1 = require("./prompts");
 const express_1 = __importDefault(require("express"));
 const react_1 = require("./defaults/react");
 const node_1 = require("./defaults/node");
+const cors_1 = __importDefault(require("cors"));
 // console.log(process.env.OPEN_API_KEY);
 const OPENAI_API_KEY = process.env.OPEN_API_KEY;
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 const openai = new openai_1.default({
     baseURL: "https://openrouter.ai/api/v1",
@@ -81,8 +83,8 @@ app.post("/chat", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         messages: message,
         stream: true,
     });
-    console.log(message);
     try {
+        // console.log(message);
         // This will stream the tokens as they arrive
         for (var _f = true, stream_1 = __asyncValues(stream), stream_1_1; stream_1_1 = yield stream_1.next(), _a = stream_1_1.done, !_a; _f = true) {
             _c = stream_1_1.value;

@@ -5,12 +5,14 @@ import { defaultPrompt, getSystemPrompt } from './prompts';
 import express from 'express'
 import { basePrompt as reactBasePrompt } from './defaults/react';
 import {basePrompt  as nodeBasePrompt} from './defaults/node'
+import cors from 'cors';
 
 // console.log(process.env.OPEN_API_KEY);
 
 
 const OPENAI_API_KEY = process.env.OPEN_API_KEY;
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const openai = new OpenAI({
